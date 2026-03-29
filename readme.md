@@ -91,3 +91,16 @@ sales_analysis/
    ```
 3. Open `sales_analysis.ipynb` in VS Code (with Jupyter extension) or JupyterLab
 4. Run all cells: `Ctrl+Shift+Enter`
+
+## Export Notebook as PDF
+
+1. Install nbconvert (if not already):
+   ```bash
+   pip install nbconvert
+   ```
+2. Export the notebook to HTML:
+   ```bash
+   python -m nbconvert --to html sales_analysis.ipynb
+   ```
+3. Open the generated `sales_analysis.html` in a browser
+4. Press `Ctrl+P` → change destination to **"Save as PDF"** → Save
