@@ -104,3 +104,40 @@ sales_analysis/
    ```
 3. Open the generated `sales_analysis.html` in a browser
 4. Press `Ctrl+P` → change destination to **"Save as PDF"** → Save
+
+## Convert Markdown to Word Document
+
+1. Install python-docx (if not already):
+   ```bash
+   pip install python-docx
+   ```
+2. Run this in terminal to convert any `.md` file to `.docx`:
+   ```bash
+   python -c "
+   from docx import Document
+   import re
+
+   md_file = 'project_synopsis.md'   # change this to your .md file
+   output_file = 'project_synopsis.docx'  # change this to your desired .docx name
+
+   doc = Document()
+   with open(md_file, 'r', encoding='utf-8') as f:
+       for line in f:
+           line = line.rstrip()
+           if line.startswith('### '):
+               doc.add_heading(line[4:], level=2)
+           elif line.startswith('## '):
+               doc.add_heading(line[3:], level=1)
+           elif line.startswith('# '):
+               doc.add_heading(line[2:], level=0)
+           elif line.startswith('- '):
+               doc.add_paragraph(re.sub(r'\*\*(.*?)\*\*', r'\1', line[2:]), style='List Bullet')
+           elif re.match(r'^\d+\. ', line):
+               doc.add_paragraph(re.sub(r'\*\*(.*?)\*\*', r'\1', re.sub(r'^\d+\. ', '', line)), style='List Number')
+           elif line.strip():
+               doc.add_paragraph(re.sub(r'\*\*(.*?)\*\*', r'\1', line))
+   doc.save(output_file)
+   print(f'{output_file} created successfully!')
+   "
+   ```
+3. Change `md_file` and `output_file` variables to match your filenames
