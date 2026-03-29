@@ -1,58 +1,93 @@
-# Sales Analysis - AAL Q4 2020
+# AAL Sales Analysis - Q4 2020
 
-## Project Statement
+## About This Repository
 
-AAL, established in 2000, is a well-known brand in Australia, particularly recognized for its clothing business. It has opened branches in various states, metropolises, and tier-1 and tier-2 cities across the country. The brand caters to all age groups, from kids to the elderly.
+This is a **course-end assessment project** for the **Applied Data Science with Python**  The project analyzes Q4 2020 sales data for AAL (Australian Apparel Limited) to provide data-driven insights for business expansion decisions.
 
-Currently experiencing a surge in business, AAL is actively pursuing expansion opportunities. To facilitate informed investment decisions, the CEO has assigned the responsibility to the head of AAL's sales and marketing (S&M) department. The specific tasks include:
+## Problem Statement
 
-1. Identify the states that are generating the highest revenues.
+AAL is a well-known Australian clothing brand established in 2000, with branches across various states. The CEO wants to:
+
+1. Identify the states generating the highest revenues.
 2. Develop sales programs for states with lower revenues.
 
-The head of sales and marketing has requested your assistance with this task. Analyze the sales data of the company for the fourth quarter in Australia, examining it on a state-by-state basis. Provide insights to assist the company in making data-driven decisions for the upcoming year.
+The task is to analyze the fourth quarter (Oct-Dec 2020) sales data on a state-by-state basis and provide actionable insights for the upcoming year.
 
-> *Enclosed is the CSV (`AusApparalSales4thQrt2020.csv`) file that covers the said data.*
+> For the detailed problem statement with all requirements, see [problem_statement.md](problem_statement.md)
 
----
+## Dataset
 
-## Steps to Perform
+**File:** `AusApparalSales4thQrt2020.csv`
 
-As a data scientist, you must perform the following steps on the enclosed data:
+| Column | Description |
+|--------|-------------|
+| Date | Sale date (Oct - Dec 2020) |
+| Time | Time of day (Morning, Afternoon, Evening) |
+| State | Australian state (VIC, NSW, SA, QLD, TAS, NT, WA) |
+| Group | Demographic group (Kids, Men, Women, Seniors) |
+| Unit | Number of units sold |
+| Sales | Revenue amount |
+
+- **Records:** 7,559 rows
+- **Period:** Q4 2020 (October, November, December)
+- **Coverage:** 7 Australian states, 4 demographic groups, 3 time slots
+
+## What Was Done
 
 ### 1. Data Wrangling
-
-- **a.** Ensure that the data is clean and free from any missing or incorrect entries.
-  - Inspect the data manually to identify missing or incorrect information using the functions `isna()` and `notna()`.
-- **b.** Based on your knowledge of data analytics, include your recommendations for treating missing and incorrect data (dropping the null values or filling them).
-- **c.** Choose a suitable data wrangling technique — either data standardization or normalization. Execute the preferred normalization method and present the resulting data. *(Normalization is the preferred approach for this problem.)*
-- **d.** Share your insights regarding the application of the `GroupBy()` function for either data chunking or merging, and offer a recommendation based on your analysis.
+- Cleaned whitespace from column names and values
+- Inspected for missing values using `isna()` and `notna()` (none found)
+- Applied Min-Max normalization on the Sales column
+- Used `GroupBy()` for state-wise and group-wise aggregation
 
 ### 2. Data Analysis
-
-- **a.** Perform descriptive statistical analysis on the data in the **Sales** and **Unit** columns. Utilize techniques such as mean, median, mode, and standard deviation for this analysis.
-- **b.** Identify the group with the highest sales and the group with the lowest sales based on the data provided.
-- **c.** Identify the group with the highest and lowest sales based on the data provided.
-- **d.** Generate weekly, monthly, and quarterly reports to document and present the results of the analysis conducted.
-
-> *Use suitable libraries such as NumPy, Pandas, and SciPy for performing the analysis.*
+- Descriptive statistics (mean, median, mode, standard deviation) on Sales and Unit columns
+- Identified highest and lowest performing states and demographic groups
+- Generated weekly, monthly, and quarterly sales reports
 
 ### 3. Data Visualization
+- State-wise sales by demographic group (bar chart)
+- Group-wise sales across states (bar chart)
+- Time-of-day peak/off-peak analysis (bar chart)
+- Box plots for sales distribution
+- Distribution plots for Sales and Unit
+- Daily, weekly, and monthly trend charts
+- Quarterly heatmap (State vs Group)
 
-- **a.** Use suitable data visualization libraries to construct a dashboard for the head of sales and marketing. The dashboard should encompass key parameters:
-  - State-wise sales analysis for different demographic groups (Kids, Women, Men, and Seniors).
-  - Group-wise sales analysis (Kids, Women, Men, and Seniors) across various states.
-  - Time-of-the-day analysis: Identify peak and off-peak sales periods to facilitate strategic planning for S&M teams. This information aids in designing programs like hyper-personalization and Next Best Offers to enhance sales.
-- **b.** Ensure the visualization is clear and accessible for effective decision-making by the head of S&M.
-  - The dashboard must contain daily, weekly, monthly, and quarterly charts.
+### 4. Report & Recommendations
+- Summary report with key findings
+- Actionable recommendations for the S&M team
 
-> *Any visualization library can be used for this purpose. However, since statistical analysis is being done, Seaborn is preferred.*
+## Tech Stack
 
-- **c.** Include your recommendation and indicate why you are choosing the recommended visualization package.
+| Tool / Library | Purpose |
+|----------------|---------|
+| Python 3.x | Programming language |
+| Pandas | Data loading, cleaning, and aggregation |
+| NumPy | Numerical computations |
+| SciPy | Statistical functions |
+| Matplotlib | Base plotting library |
+| Seaborn | Statistical visualizations |
+| Jupyter Notebook | Report generation (code + visuals + markdown) |
+| VS Code | IDE with Jupyter extension |
 
-### 4. Report Generation
+## Project Structure
 
-- **a.** Use JupyterLab Notebook for generating reports, which includes tasks such as data wrangling, analysis, and visualization. JupyterLab enables you to integrate code seamlessly with graphs and plots.
-- **b.** Use Markdown in suitable places while presenting your report.
-- **c.** Use suitable graphs, plots, and analysis reports in the report, along with recommendations. Note that various aspects of analysis require different graphs and plots.
-  - Use a **box plot** for descriptive statistics.
-  - Use the **Seaborn distribution plot** for any other statistical plotting.
+```
+sales_analysis/
+├── AusApparalSales4thQrt2020.csv    # Raw dataset
+├── sales_analysis.ipynb              # Jupyter Notebook (main deliverable)
+├── problem_statement.md              # Detailed problem statement & requirements
+├── readme.md                         # This file
+└── .gitignore                        # Git ignore rules
+```
+
+## How to Run
+
+1. Install Python 3.x and pip
+2. Install dependencies:
+   ```bash
+   pip install pandas numpy scipy matplotlib seaborn jupyter
+   ```
+3. Open `sales_analysis.ipynb` in VS Code (with Jupyter extension) or JupyterLab
+4. Run all cells: `Ctrl+Shift+Enter`
